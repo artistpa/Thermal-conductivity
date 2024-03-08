@@ -1,2 +1,2 @@
 # Thermal-conductivity
-# Modeling of heat transfer
+Modeling of heat transfer
