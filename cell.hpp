@@ -1,3 +1,6 @@
+#ifndef cell
+#define cell 1
+
 #include <SFML/Graphics.hpp>
 class cell{
 protected:
@@ -10,3 +13,5 @@ public:
     void set_temperature(unsigned int temp);
     unsigned int get_temperature() const;
 };
+
+#endif // cell
