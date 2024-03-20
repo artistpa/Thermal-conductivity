@@ -1,5 +1,17 @@
 #pragma once
 #include "mesh_1d.h"
+#include <cmath>
+
+float get_static_temperature1d(int x, int L, float T1, float T2){
+    return (T1-T2) * x / L + T1;
+}
+sf::Uint8 get_r(float T){
+    return (std::round(0.34 * T - 85));
+}
+
+sf::Uint8 get_b(float T){
+    return (std::round(-0.34 * T + 340));
+}
 
 
 class painter {
@@ -36,26 +48,21 @@ void painter::display(mesh1d mesh) {
 		}
 
 
-		sf::Uint8 col1 = 0;
-		sf::Uint8 col2 = 256;
-		sf::Uint8 col3 = 0;
 
-		
+
+
 
 
 		for (int id = 0; id < mesh.get_celnum(); id++) {
 
-			sf::RectangleShape shape(sf::Vector2f(meshstep, 100)); //setting a cell 
+			sf::RectangleShape shape(sf::Vector2f(meshstep, 100)); //setting a cell
 
 			shape.setPosition((id * meshstep), 0); // positioning the cell; (crd * id) is a number of cell * length of a cell in pixels
 
-			// TEST FEATURE WITH COLORS 
-			shape.setFillColor(sf::Color{0, col2, col3});
-			col1++;
-			col2++;
-			col3++;
+			// TEST FEATURE WITH COLORS
+			shape.setFillColor(sf::Color{get_r(get_static_temperature1d(id * meshstep, 1000, 500, 350)), 0, get_b(get_static_temperature1d(id * meshstep, 1000, 500, 350))});
 			window.draw(shape);
-			
+
 		}
 		window.display();
 
