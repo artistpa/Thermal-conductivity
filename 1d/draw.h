@@ -5,7 +5,7 @@
 class Solver {
 protected:
     float t = 1;
-    float h = 50;
+    float h = 5;
     float a = 1;
     float T[100];
     float Tmax = 5000;
@@ -23,7 +23,7 @@ public:
             T1[i] = this->T[i];
         for (int i = 1; i < 99; i++)
             if (T[i] <= Tmax)
-            this->T[i] += ((a * t) / (h * h)) * (T1[i - 1] - T1[i + 1]);
+            this->T[i] += ((a * t) / (h * h)) * (T1[i - 1] + T1[i + 1] - 2 * T[i]);
     }
     float get_T(int id){
         return T[id];

@@ -6,7 +6,7 @@
 
 int main() {
 	mesh2d a;
-	a.set_mesh2d(100, 100, 1, 2);
+	a.set_mesh2d(50, 50, 1, 1);
 	painter b(1000, 500);
 	b.display(a);
 	a.clear_mesh();

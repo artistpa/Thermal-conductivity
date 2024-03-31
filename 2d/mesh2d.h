@@ -35,7 +35,6 @@ public:
 	void set_mesh2d (int xlen, int ylen, int xstep, int ystep);
 	void clear_mesh();
 	void set_temp(int x, int y, int temp); // sets temp temperature in [x, y] cell
-	int get_temp(int x, int y);
 	int get_uxsize(); // returns x length of mesh in units
 	int get_uysize(); // returns y length of mesh in units
 
@@ -101,10 +100,6 @@ void mesh2d::set_mesh2d(int xlen, int ylen, int xstep, int ystep) {
 
 void mesh2d::set_temp(int x, int y, int temp) {
 	this->data.get_el(x, y).set_cell_temp(temp);
-};
-
-int mesh2d::get_temp(int x, int y) {
-	return this->data.get_el(x, y).get_cell_temp();
 }
 
 int mesh2d::get_uxsize() {
