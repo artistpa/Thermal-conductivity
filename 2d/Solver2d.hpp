@@ -1,13 +1,13 @@
+#pragma once
+#include <vector>
 class Solver2d {
 protected:
-    float t = 1;
-    float h = 50;
-    float a = 50;
-    float T[50][50];
-    float Tmax = 5000;
-    float Tmin = 300;
+    const float t = 1;
+    const float h = 50;
+    const float a = 50;
+   /* std::vector<std::vector<float>> T(mesh2d::get_uysize(), std::vector <int> (mesh2d::get_uxsize()));
+    const float T_max;
+    const float T_min;*/
 public:
-    void set_T0(float t, float t_left, float t_right);
-    void update_T();
-    float get_T(int i, int j);
+    float operator()(float T1, float T2, float T3, float T4, float T5);
 };

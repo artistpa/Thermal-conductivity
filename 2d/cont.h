@@ -24,10 +24,10 @@ public:
 			}
 			data.push_back(tmpvec);
 		}
-	}; 
+	};
 
 
-	//returns an element from coontainer
+	//returns an element from container
 	//use it, if you want to change smth in cell (ex setting temp)
 	cell2d get_el(int i, int j) {
 		return *(*data[i])[j];

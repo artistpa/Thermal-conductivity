@@ -9,13 +9,14 @@ struct cellid {
 class cell2d {
 private:
 	cellid id; //number of cell [x, y]
-	int temp; // temperature
+	float temp; // temperature
 public:
 	cell2d();
 	~cell2d();
 	void set_cell_id(int x, int y);
 	void clear_cell(); // clears cell
-	void set_cell_temp(int tenp); // sets cells temperature
+	void set_cell_temp(float temp); // sets cells temperature
+	float get_cell_temp();
 	int getid_x(); //  returns x_coord
 	int getid_y(); // returns y_coord
 };
@@ -41,9 +42,13 @@ void cell2d::clear_cell() {
 	this->temp = 0;
 }
 
-void cell2d::set_cell_temp(int tenp) {
+void cell2d::set_cell_temp(float temp) {
 	this->temp = temp;
 };
+
+float cell2d::get_cell_temp(){
+    return temp;
+}
 
 // setting cells ID (more like units, defenitely not mm)
 void cell2d::set_cell_id(int x, int y) {

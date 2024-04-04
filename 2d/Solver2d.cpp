@@ -1,37 +1,13 @@
 #include "Solver2d.hpp"
 
-void Solver2d::set_T0(float t, float t_left, float t_right){
-    /*T[0][0] = t_left;
-    T[49][49] = t_right;
-    T[0][1] = t_left;
-    T[1][0] = t_left;
-    T[1][1] = t_left;*/
-    for (int i = 0; i < 50; i++)
-        T[i][0] = t_left;
-    for (int j = 1; j < 50; j++)
-        T[0][j] = t_left;
-    for (int i = 1; i < 50; i++)
-        T[i][49] = t_left;
-    for (int j = 1; j < 49; j++)
-        T[49][j] = t_left;
-    for (int i = 1; i < 49; i++)
-        for (int j = 1; j < 49; j++)
-                T[i][j] = t;
+float Solver2d::operator() (float T1, float T2, float T3, float T4, float T5){
+    return(T1 + ((a * t) / (h * h)) * (T2 + T3 + T4 + T5 - 4 * T1));
+    /*for (int i = 0; i < mesh.get_uysize(); i++)
+        for (int j = 0; j < mesh.get_uxsize(); j++)
+            T[i][j] = mesh.get_temp(i, j);
+    for (int i = 1; i < (mesh.get_uysize() - 1); i++)
+        for (int j = 1; j < (mesh.get_uxsize() - 1); j++)
+            if (T[i][j] <= this->T_max)
+                 mesh.set_temp(i, j, T[i][j] + ((a * t) / (h * h)) * (T[i + 1][j] + T[i - 1][j] + T[i][j-1] + T[i][j + 1] - 4 * T[i][j]));*/
 }
 
-
-void Solver2d::update_T(){
-    float T1[50][50];
-    for (int i = 0; i < 50; i++)
-        for (int j = 0; j < 50; j++)
-            T1[i][j] = this->T[i][j];
-    for (int i = 1; i < 49; i++)
-        for (int j = 1; j < 49; j++)
-            if (T[i][j] <= Tmax)
-                this->T[i][j] += ((a * t) / (h * h)) * (T1[i + 1][j] + T1[i - 1][j] + T1[i][j-1] + T1[i][j + 1] - 4 * T1[i][j]);
-}
-
-
-float Solver2d::get_T(int i, int j){
-    return T[i][j];
-}

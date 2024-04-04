@@ -47,9 +47,14 @@ void painter::display(mesh2d mesh) {
 	this->pisize.xpisize = this->windowsz.xsize / mesh.get_uxsize();
 	this->pisize.ypisize = this->windowsz.ysize / mesh.get_uysize();
 
-    Solver2d s;
-
-    s.set_T0(300, 5000, 300);
+    mesh.set_T_min();
+    mesh.set_T_max();
+    mesh.set_T0_mesh();
+    std::cout << mesh.get_temp(0,0) << std::endl;
+    std::cout << mesh.get_T_min() << std::endl;
+    std::cout << mesh.get_T_max() << std::endl;
+    std::cout << mesh.get_uxsize() << std::endl;
+    std::cout << mesh.get_uysize() << std::endl;
 
     //std::cout << mesh.get_uysize() << std::endl;
 	// creating SFML window
@@ -62,8 +67,8 @@ void painter::display(mesh2d mesh) {
 			if (event.type == sf::Event::Closed)
 				window.close();
 		}
-
-        s.update_T();
+        //Solver2d sol;
+        //mesh.update(sol);
 		for (int ix = 0; ix < mesh.get_uxsize(); ix++) {
 			for (int iy = 0; iy < mesh.get_uysize(); iy++) {
 
@@ -74,7 +79,7 @@ void painter::display(mesh2d mesh) {
                 //std::cout << s.get_T(0, 1) << std::endl;
 				shape.setPosition(ix * this->pisize.xpisize, iy * this->pisize.ypisize);
 
-				shape.setFillColor(sf::Color{get_r(s.get_T(ix, iy), 300, 5000), 0, get_b(s.get_T(ix, iy), 300, 5000)});
+				shape.setFillColor(sf::Color{get_r(mesh.get_temp(ix, iy), mesh.get_T_min(), mesh.get_T_max()), 0, get_b(mesh.get_temp(ix, iy), mesh.get_T_min(), mesh.get_T_max())});
 				window.draw(shape);
 
 
