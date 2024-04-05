@@ -35,7 +35,8 @@ public:
 	void set_mesh2d (int xlen, int ylen, int xstep, int ystep);
 	void clear_mesh();
 	void set_temp(int x, int y, int temp); // sets temp temperature in [x, y] cell
-	int get_temp(int x, int y);
+	void set_T0(); // sets starting temperature across 
+	int get_temp(int x, int y); // returns temperature in [x, y] cell
 	int get_uxsize(); // returns x length of mesh in units
 	int get_uysize(); // returns y length of mesh in units
 
@@ -84,7 +85,7 @@ void mesh2d::set_mesh2d(int xlen, int ylen, int xstep, int ystep) {
 
 		for (int i = 0; i < this->size.xsize; i++) {
 			this->data.get_el(i, j).set_cell_id(i, j);
-			this->data.get_el(i, j).set_cell_temp(0);
+			this->data.set_temp_cont(i, j, 0);
 		}
 	}
 
@@ -96,11 +97,13 @@ void mesh2d::set_mesh2d(int xlen, int ylen, int xstep, int ystep) {
 
 	std::cout << std::endl;
 	std::cout << "2D MESH SUCSESSFULLY SET" << std::endl;
+	std::cout << "SIZE OF DATA: " << this->data.get_xsize() << " " << this->data.get_ysize() << std::endl;
 
 }
 
-void mesh2d::set_temp(int x, int y, int temp) {
-	this->data.get_el(x, y).set_cell_temp(temp);
+void mesh2d::set_temp(int x, int y, int tempr) {
+	//this->data.get_el(x, y).set_cell_temp(tempr);
+	this->data.set_temp_cont(x, y, tempr);
 };
 
 int mesh2d::get_temp(int x, int y) {
@@ -123,5 +126,8 @@ void mesh2d::clear_mesh() {
 	this->meshstep.ystep = 0;
 	this->size.xsize = 0;
 	this->size.ysize = 0;
+}
 
+void mesh2d::set_T0() {
+	
 }

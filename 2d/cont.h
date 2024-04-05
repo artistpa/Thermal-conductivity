@@ -47,4 +47,23 @@ public:
 
 	}
 
+	int get_xsize();
+	int get_ysize();
+
+	void set_temp_cont(int x, int y, int tempr);
+
 };
+
+int cont::get_xsize() {
+	return this->xsize;
+}
+
+int cont::get_ysize() {
+	return this->ysize;
+}
+
+void cont::set_temp_cont(int x, int y, int tempr) {
+	(*data[x])[y]->set_cell_temp(tempr);
+}
+
+

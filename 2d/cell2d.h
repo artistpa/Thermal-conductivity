@@ -15,9 +15,8 @@ public:
 	~cell2d();
 	void set_cell_id(int x, int y);
 	void clear_cell(); // clears cell
-	void set_cell_temp(int tenp); // sets cells temperature
-	int getid_x(); //  returns x_coord
-	int getid_y(); // returns y_coord
+	void set_cell_temp(int tenpr); // sets cells temperature
+	int get_cell_temp(); // returns cells temperature
 };
 
 
@@ -41,25 +40,17 @@ void cell2d::clear_cell() {
 	this->temp = 0;
 }
 
-void cell2d::set_cell_temp(int tenp) {
-	this->temp = temp;
+void cell2d::set_cell_temp(int tempr) {
+	this->temp = tempr;
+	std::cout << "SETTING CELL TEMP TO: " << tempr << " REAL TEMP: " << this->temp << std::endl;
 };
+
+int cell2d::get_cell_temp() {
+	return this->temp;
+}
 
 // setting cells ID (more like units, defenitely not mm)
 void cell2d::set_cell_id(int x, int y) {
 	this->id.x = x;
 	this->id.y = y;
 }
-
-int cell2d::getid_x() {
-	return this->id.x;
-}
-
-int cell2d::getid_y() {
-	return this->id.y;
-}
-
-
-
-
-

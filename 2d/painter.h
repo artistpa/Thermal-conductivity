@@ -75,7 +75,15 @@ void painter::display(mesh2d mesh) {
 					shape.setFillColor(sf::Color{0, 200, 0});
 				}*/
 
-				shape.setFillColor(sf::Color{sf::Uint8(sin(ix) * 100), sf::Uint8(cos(iy) * 100), 0});
+				if (mesh.get_temp(ix, iy) != 0) {
+					shape.setFillColor(sf::Color{100, 100, 100});
+				}
+
+				else {
+					shape.setFillColor(sf::Color{200, 200, 200});
+
+				}
+				//shape.setFillColor(sf::Color{sf::Uint8(sin(ix) * 100), sf::Uint8(cos(iy) * 100), 0});
 				window.draw(shape);
 				
 
