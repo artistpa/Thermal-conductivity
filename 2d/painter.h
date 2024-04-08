@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "mesh2d.h"
+#include "Solver2d.hpp"
 
 
 // dimensions of one cell in pixels
@@ -15,6 +16,15 @@ struct window_size {
 	int ysize;
 };
 
+//Temperature to colour
+sf::Uint8 get_r(float T, float Tmin, float Tmax){
+    return (std::round((255 / (Tmax - Tmin)) * T - (255 / (Tmax - Tmin)) * Tmin));
+};
+
+sf::Uint8 get_b(float T, float Tmin, float Tmax){
+    return (std::round((255 / (Tmin - Tmax)) * T - (255 / (Tmin - Tmax)) * Tmax));
+};
+
 
 class painter {
 public:
@@ -25,6 +35,7 @@ public:
 private:
 	window_size windowsz; //size of the window
 	cell_pisize pisize; // pixels for 1 unit
+	Solver2d sol;
 };
 
 painter::painter(int xwinsize, int ywinsize) {
@@ -50,47 +61,26 @@ void painter::display(mesh2d mesh) {
 				window.close();
 		}
 
-
-		sf::Uint8 col1 = 100;
-		sf::Uint8 col2 = 100;
-		sf::Uint8 col3 = 100;
-
-
+        mesh.update(sol);
 
 
 		for (int ix = 0; ix < mesh.get_uxsize(); ix++) {
 			for (int iy = 0; iy < mesh.get_uxsize(); iy++) {
-				
-				sf::RectangleShape shape(sf::Vector2f(this->pisize.xpisize, this->pisize.ypisize)); //setting a cell 
-				std::cout << "XPISIZE = " << this->pisize.xpisize << std::endl;
-				std::cout << "yPISIZE = " << this->pisize.ypisize << std::endl;
 
+				sf::RectangleShape shape(sf::Vector2f(this->pisize.xpisize, this->pisize.ypisize)); //setting a cell
+				//std::cout << "XPISIZE = " << this->pisize.xpisize << std::endl;
+				//std::cout << "yPISIZE = " << this->pisize.ypisize << std::endl;
 
+                shape.setPosition(ix * this->pisize.xpisize, iy * this->pisize.ypisize);
 
-				shape.setPosition(ix * this->pisize.xpisize, iy * this->pisize.ypisize);
-				/*if ((ix % 2 == 0) and (iy % 2 == 0)) {
-					shape.setFillColor(sf::Color{200, 0, 200});
-				}
-				else {
-					shape.setFillColor(sf::Color{0, 200, 0});
-				}*/
-
-				if (mesh.get_temp(ix, iy) != 0) {
-					shape.setFillColor(sf::Color{100, 100, 100});
-				}
-
-				else {
-					shape.setFillColor(sf::Color{200, 200, 200});
-
-				}
-				//shape.setFillColor(sf::Color{sf::Uint8(sin(ix) * 100), sf::Uint8(cos(iy) * 100), 0});
+				shape.setFillColor(sf::Color{get_r(mesh.get_temp(ix, iy), 300, 5000), 0, get_b(mesh.get_temp(ix, iy), 300, 5000)});
 				window.draw(shape);
-				
 
 
-			}			
+
+			}
 		}
-		
+
 
 
 		window.display();
