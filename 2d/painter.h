@@ -2,6 +2,7 @@
 #include <iostream>
 #include "mesh2d.h"
 #include "Solver2d.hpp"
+#include "Colour_master.hpp"
 
 
 // dimensions of one cell in pixels
@@ -16,15 +17,6 @@ struct window_size {
 	int ysize;
 };
 
-//Temperature to colour
-sf::Uint8 get_r(float T, float Tmin, float Tmax){
-    return (std::round((255 / (Tmax - Tmin)) * T - (255 / (Tmax - Tmin)) * Tmin));
-};
-
-sf::Uint8 get_b(float T, float Tmin, float Tmax){
-    return (std::round((255 / (Tmin - Tmax)) * T - (255 / (Tmin - Tmax)) * Tmax));
-};
-
 
 class painter {
 public:
@@ -36,6 +28,7 @@ private:
 	window_size windowsz; //size of the window
 	cell_pisize pisize; // pixels for 1 unit
 	Solver2d sol;
+	Colour_master col;
 };
 
 painter::painter(int xwinsize, int ywinsize) {
@@ -73,7 +66,7 @@ void painter::display(mesh2d mesh) {
 
                 shape.setPosition(ix * this->pisize.xpisize, iy * this->pisize.ypisize);
 
-				shape.setFillColor(sf::Color{get_r(mesh.get_temp(ix, iy), 300, 5000), 0, get_b(mesh.get_temp(ix, iy), 300, 5000)});
+				shape.setFillColor(sf::Color{col.get_r(mesh.get_temp(ix, iy), 300, 5000), 0, col.get_b(mesh.get_temp(ix, iy), 300, 5000)});
 				window.draw(shape);
 
 
