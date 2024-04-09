@@ -5,6 +5,7 @@
 #include "Colour_master.hpp"
 
 
+
 // dimensions of one cell in pixels
 struct cell_pisize {
 	int xpisize;
@@ -16,7 +17,6 @@ struct window_size {
 	int xsize;
 	int ysize;
 };
-
 
 class painter {
 public:
@@ -65,8 +65,7 @@ void painter::display(mesh2d mesh) {
 				//std::cout << "yPISIZE = " << this->pisize.ypisize << std::endl;
 
                 shape.setPosition(ix * this->pisize.xpisize, iy * this->pisize.ypisize);
-
-				shape.setFillColor(sf::Color{col.get_r(mesh.get_temp(ix, iy), 300, 5000), 0, col.get_b(mesh.get_temp(ix, iy), 300, 5000)});
+				shape.setFillColor(sf::Color{col.get_r(mesh.get_temp(ix, iy), mesh.get_tmin(), mesh.get_tmax()), 0, col.get_b(mesh.get_temp(ix, iy), mesh.get_tmin(), mesh.get_tmax())});
 				window.draw(shape);
 
 
@@ -74,13 +73,22 @@ void painter::display(mesh2d mesh) {
 			}
 		}
 
+		//drawing temperature bar
+		sf::RectangleShape bar(sf::Vector2f(200, 20));
+		bar.setFillColor(sf::Color::Blue);
+		bar.setPosition(this->pisize.xpisize, this->pisize.ypisize);
 
+		// Calculate the width of the temperature bar based on the current temperature
+		float tempRange = mesh.get_tmax() - mesh.get_tmin();
+
+		sf::RectangleShape tempBar(sf::Vector2f(20, 20));
+		tempBar.setFillColor(sf::Color::Red);
+		tempBar.setPosition(mesh.get_uxsize(), mesh.get_uxsize());
+
+		window.draw(bar);
+		window.draw(tempBar);
 
 		window.display();
 	}
-
-
-
-
 
 }

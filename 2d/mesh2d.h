@@ -20,6 +20,11 @@ struct meshsize {
 	int ysize;
 };
 
+struct temp_critical {
+	int tmax;
+	int tmin;
+};
+
 
 
 
@@ -30,6 +35,7 @@ private:
 	cont data;
 	dimstep meshstep; // mm
 	meshsize size; // units
+	temp_critical tcrit; // T_min and T_max
 public:
 	mesh2d(); // конструктор
 
@@ -45,6 +51,8 @@ public:
 	int get_xstep(); // returns xstep (mm)
 	int getx(int num_of_cell);// returns id
 	int getsize(); //returns mesh length (mm)
+	int get_tmin(); // getter for T_min
+	int get_tmax(); // getter for T_max
 
 };
 
@@ -58,6 +66,8 @@ mesh2d::mesh2d() {
 	this->meshstep.xstep = 0;
 	this->meshstep.ystep = 0;
 	this->size.xsize = 0;
+	this->tcrit.tmax = 0;
+	this->tcrit.tmin = 0;
 
 	std::cout << "2d MESH SUCCESSFULLY CREATED" << std::endl;
 };
@@ -120,16 +130,19 @@ int mesh2d::get_uysize() {
 };
 
 
-
 void mesh2d::clear_mesh() {
 	this->data.clear();
 	this->meshstep.xstep = 0;
 	this->meshstep.ystep = 0;
 	this->size.xsize = 0;
 	this->size.ysize = 0;
+	this->tcrit.tmax = 0;
+	this->tcrit.tmin = 0;
 };
 
 void mesh2d::set_T0(float T_max, float T_min) {
+	this->tcrit.tmax = T_max;
+	this->tcrit.tmin = T_min;
     for (int i = 0; i < get_uysize(); i++)
         set_temp(i, 0, T_max);
     for (int j = 1; j < get_uxsize(); j++)
@@ -148,4 +161,14 @@ void mesh2d::update(Solver2d s){
         for (int j = 1; j < (mesh2d::get_uxsize() - 1); j++)
             if (mesh2d::get_temp(i, j) <= 5000)
                  mesh2d::set_temp(i, j, s(mesh2d::get_temp(i, j), mesh2d::get_temp(i, j - 1), mesh2d::get_temp(i, j + 1), mesh2d::get_temp(i + 1, j), mesh2d::get_temp(i - 1, j)));
+
 };
+
+int mesh2d::get_tmax() {
+	return this->tcrit.tmax;
+};
+
+int mesh2d::get_tmin() {
+	return this->tcrit.tmin;
+};
+
