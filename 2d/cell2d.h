@@ -42,7 +42,7 @@ void cell2d::clear_cell() {
 
 void cell2d::set_cell_temp(int tempr) {
 	this->temp = tempr;
-	std::cout << "SETTING CELL TEMP TO: " << tempr << " REAL TEMP: " << this->temp << std::endl;
+	//std::cout << "SETTING CELL TEMP TO: " << tempr << " REAL TEMP: " << this->temp << std::endl;
 };
 
 int cell2d::get_cell_temp() {

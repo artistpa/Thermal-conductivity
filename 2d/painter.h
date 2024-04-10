@@ -3,7 +3,7 @@
 #include "mesh2d.h"
 #include "Solver2d.hpp"
 #include "Colour_master.hpp"
-
+#include <cmath>
 
 
 // dimensions of one cell in pixels
@@ -29,6 +29,7 @@ private:
 	cell_pisize pisize; // pixels for 1 unit
 	Solver2d sol;
 	Colour_master col;
+	int add_temp = 10;
 };
 
 painter::painter(int xwinsize, int ywinsize) {
@@ -52,8 +53,16 @@ void painter::display(mesh2d mesh) {
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
+            if (event.type == sf::Event::MouseButtonPressed) {
+                std::cout << std::endl;
+                sf::Vector2i position = sf::Mouse::getPosition(window);
+                std::cout << std::round(position.x / this->pisize.xpisize) << "   " << std::round(position.y / this->pisize.ypisize) << std::endl;
+                std::cout << std::round(this->pisize.xpisize) << "   " << std::round(position.y / this->pisize.ypisize) << std::endl;
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    mesh.set_temp(std::round(position.x / this->pisize.xpisize), std::round(position.y / this->pisize.ypisize), 5000/*mesh.get_temp(position.x / this->pisize.xpisize, position.y / this->pisize.ypisize) + add_temp*/);
+                }
+            }
 		}
-
         mesh.update(sol);
 
 
@@ -73,22 +82,8 @@ void painter::display(mesh2d mesh) {
 			}
 		}
 
-		//drawing temperature bar
-		sf::RectangleShape bar(sf::Vector2f(200, 20));
-		bar.setFillColor(sf::Color::Blue);
-		bar.setPosition(this->pisize.xpisize, this->pisize.ypisize);
-
-		// Calculate the width of the temperature bar based on the current temperature
-		float tempRange = mesh.get_tmax() - mesh.get_tmin();
-
-		sf::RectangleShape tempBar(sf::Vector2f(20, 20));
-		tempBar.setFillColor(sf::Color::Red);
-		tempBar.setPosition(mesh.get_uxsize(), mesh.get_uxsize());
-
-		window.draw(bar);
-		window.draw(tempBar);
 
 		window.display();
-	}
+    }
 
 }
