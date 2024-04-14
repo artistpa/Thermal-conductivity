@@ -1,9 +1,11 @@
 #pragma once
 #include <iostream>
+#include <cmath>
 #include "mesh2d.h"
 #include "Solver2d.hpp"
 #include "Colour_master.hpp"
-#include <cmath>
+#include "menu.hpp"
+
 
 
 // dimensions of one cell in pixels
@@ -29,7 +31,7 @@ private:
 	cell_pisize pisize; // pixels for 1 unit
 	Solver2d sol;
 	Colour_master col;
-	int add_temp = 10;
+	int add_temp = 100;
 };
 
 painter::painter(int xwinsize, int ywinsize) {
@@ -45,7 +47,8 @@ void painter::display(mesh2d mesh) {
 	this->pisize.ypisize = this->windowsz.ysize / mesh.get_uysize();
 
 	// creating SFML window
-	sf::RenderWindow window(sf::VideoMode(this->windowsz.xsize, this->windowsz.ysize), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(this->windowsz.xsize, this->windowsz.ysize), "Thermal conductivity");
+    menu(window);
 	while (window.isOpen())
 	{
 		sf::Event event;
@@ -56,7 +59,7 @@ void painter::display(mesh2d mesh) {
             if (event.type == sf::Event::MouseButtonPressed) {
                 std::cout << std::endl;
                 sf::Vector2i position = sf::Mouse::getPosition(window);
-                std::cout << std::round(position.x / this->pisize.xpisize) << "   " << std::round(position.y / this->pisize.ypisize) << std::endl;
+                //std::cout << std::round(position.x / this->pisize.xpisize) << "   " << std::round(position.y / this->pisize.ypisize) << std::endl;
                 std::cout << std::round(this->pisize.xpisize) << "   " << std::round(position.y / this->pisize.ypisize) << std::endl;
                 if (event.mouseButton.button == sf::Mouse::Left) {
                     mesh.set_temp(std::round(position.x / this->pisize.xpisize), std::round(position.y / this->pisize.ypisize), 5000/*mesh.get_temp(position.x / this->pisize.xpisize, position.y / this->pisize.ypisize) + add_temp*/);
