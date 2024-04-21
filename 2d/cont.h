@@ -24,7 +24,7 @@ public:
 			}
 			data.push_back(tmpvec);
 		}
-	}; 
+	};
 
 
 	//returns an element from coontainer
@@ -62,7 +62,7 @@ int cont::get_ysize() {
 	return this->ysize;
 }
 
-void cont::set_temp_cont(int x, int y, int tempr) {
+void cont::set_temp_cont(const int x, const int y, const int tempr) {
 	(*data[x])[y]->set_cell_temp(tempr);
 }
 
