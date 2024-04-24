@@ -83,7 +83,7 @@ void painter::display(mesh2d mesh) {
 				sf::Vector2i position = sf::Mouse::getPosition(window);
 				// reacting on mouse tap
 				if (event.mouseButton.button == sf::Mouse::Left) {
-					if ( ( std::round(position.x / this->pisize.xpisize) < mesh.get_uxsize()) and  std::round(position.y / this->pisize.ypisize) < mesh.get_uysize()) {
+					if (( std::round(position.x / this->pisize.xpisize) < mesh.get_uxsize()) and  std::round(position.y / this->pisize.ypisize) < mesh.get_uysize()) {
 						if (inspector == true)
                             mesh.set_temp(std::round(position.x / this->pisize.xpisize), std::round(position.y / this->pisize.ypisize), mesh.get_tmax());
                         else
