@@ -2,7 +2,7 @@
 #include <vector>
 class Solver2d {
 protected:
-    const float t = 80;
+    const float t = 100;
     const float h = 50;
     const float a = 10;
 public:
