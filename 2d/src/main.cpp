@@ -1,14 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
 #include "painter.h"
 #include "mesh2d.h"
 
 int main() {
 	mesh2d a;
-	a.set_mesh2d(50, 50, 1, 1);
-	a.set_T0(5000, 300);
-	std::cout << a.get_temp(1, 1);
+	a.set_mesh2d(1, 1, 0.02, 0.02);
+	a.set_T0(1500, 100);
     painter b(1200, 500);
 	b.display(a);
 	a.clear_mesh();

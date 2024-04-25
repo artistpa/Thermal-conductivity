@@ -1,25 +1,33 @@
-cmake_minimum_required (VERSION 3.6)
+cmake_minimum_required (VERSION 2.8)
 
-set(CMAKE_CXX_FLAGS "-std=c++20 -O2 -g")
+set(CMAKE_CXX_FLAGS "-Wall")
+set(CMAKE_CXX_STANDARD 17)
 
-#-fsanitize=address,undefined
+if(UNIX)
+    message("This is a ${CMAKE_SYSTEM_NAME} system")
+elseif(WIN32)
+    message("This is a Windows System")
+endif()
 
-project (ThermalConductivity)
+project (Thermal-Conductivity)
 
 find_package(SFML COMPONENTS graphics window system audio REQUIRED)
 
 add_library(Lib SHARED 
-    src/func.cc
-    src/particle.cc
-    src/pressure_map.cc
-    src/pressure_map_cell.cc
+    src/cell2d.cpp
+    src/Colour_master.cpp
+    src/cont.cpp
+    src/menu.cpp
+    src/mesh2d.cpp
+    src/painter.cpp
+    src/Solver2d.cpp
 )
 
-add_executable(MyProj src/main.cc)
+add_executable(Therm_Con src/main.cpp)
 
-target_include_directories(MyProj PUBLIC include/)
-target_include_directories(Lib PUBLIC include/) #for includes
-target_include_directories(Lib PUBLIC /opt/homebrew/include/) #for sfml
+target_include_directories(Therm_Con PUBLIC)
+target_include_directories(Lib PUBLIC) #for includes
+target_include_directories(Lib PUBLIC usr/include/SFML) #for sfml
 
 target_link_libraries(Lib sfml-graphics sfml-window sfml-system)
-target_link_libraries(MyProj sfml-graphics sfml-window sfml-system sfml-audio Lib)
+target_link_libraries(Therm_Con sfml-graphics sfml-window sfml-system sfml-audio Lib)
