@@ -10,8 +10,8 @@
   3. Создаём папку, в которую склонируем проект.
   4. `git clone git@github.com:artistpa/Thermal-conductivity.git`
   5. `cd Thermal-conductivity` 
-  6. Если хотим запустить версию 1d (версия 1d начальная, тестовая), то
-     I. `cd 1d`
+  6. Если хотим запустить версию 1d (версия 1d начальная, тестовая), то \n
+     I. `cd 1d` \n
      II. `g++ -c *.cpp`
      III. `g++ *.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system`
      IV. `./sfml-app`
