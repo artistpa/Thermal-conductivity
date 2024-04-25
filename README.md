@@ -11,18 +11,18 @@
   4. `git clone git@github.com:artistpa/Thermal-conductivity.git`
   5. `cd Thermal-conductivity` 
   6. Если хотим запустить версию 1d (версия 1d начальная, тестовая), то
-     1. `cd 1d`
-     2. `g++ -c *.cpp`
-     3. `g++ *.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system`
-     4. `./sfml-app`
+     I. `cd 1d`
+     II. `g++ -c *.cpp`
+     III. `g++ *.o -o sfml-app -lsfml-graphics -lsfml-window -lsfml-system`
+     IV. `./sfml-app`
   8. Если хотим запустить версию 2d (версия 2d итоговая), то
-     1. `cd 2d`
-     2. `mkdir build`
-     3. `cd build`
-     4. `cmake ..`
-     5. `make`
-     6. `./Therm_Con`
-     7. Откроется дисплей, для запуска нажимаем старт.
+     I. `cd 2d`
+     II. `mkdir build`
+     III. `cd build`
+     IV. `cmake ..`
+     V. `make`
+     VI. `./Therm_Con`
+     VII. Откроется дисплей, для запуска нажимаем старт.
   9. Проект запущен! 
     
     
