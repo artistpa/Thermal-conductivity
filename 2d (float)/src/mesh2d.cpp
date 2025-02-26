@@ -97,15 +97,13 @@ void mesh2d::set_T0(float T_max, float T_min) {
 			set_temp(i, j, T_min);
 };
 
-void mesh2d::update(Solver2d s) {
-    s.setsolver((this->get_tmax() - this->get_tmin()) * 0.05, 50, 10);
-	for (int i = 1; i < (mesh2d::get_uysize() - 1); i++)
-		for (int j = 1; j < (mesh2d::get_uxsize() - 1); j++)
-            // check that temperature <= T_max
-			if (s(mesh2d::get_temp(i, j), mesh2d::get_temp(i, j - 1), mesh2d::get_temp(i, j + 1), mesh2d::get_temp(i + 1, j), mesh2d::get_temp(i - 1, j)) <= get_tmax())
-				mesh2d::set_temp(i, j, s(mesh2d::get_temp(i, j), mesh2d::get_temp(i, j - 1), mesh2d::get_temp(i, j + 1), mesh2d::get_temp(i + 1, j), mesh2d::get_temp(i - 1, j)));
-            else
-                mesh2d::set_temp(i, j, get_tmax());
+void mesh2d::update(Solver2d &s) {
+    s.setsolver(1, 50, 10, this->data);
+	#if METHOD==0
+		this->data=s(Solvers::EULER);
+	#elif METHOD==1
+		this->data=s(Solvers::RK45);
+	#endif
 };
 
 float mesh2d::get_tmax() {

@@ -30,5 +30,5 @@ private:
 public:
 	painter(int xwinsize, int ywinsize); // sets size of SFML window
 	~painter();
-	void display(mesh2d mesh); // displays mesh
+	void display(mesh2d& mesh); // displays mesh
 };

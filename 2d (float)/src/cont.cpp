@@ -23,7 +23,6 @@ void cont::clear() {
 		delete data[i];
 	}
 	data.clear();
-
 }
 
 cont::cont(int xsize, int ysize) {
@@ -40,7 +39,3 @@ cont::cont(int xsize, int ysize) {
 
 	};
 }
-
-
-
-
