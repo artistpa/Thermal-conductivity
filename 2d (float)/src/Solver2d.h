@@ -3,7 +3,7 @@
 enum Solvers
 {
     EULER,
-    RK45,
+    RK4,
 };
 
 

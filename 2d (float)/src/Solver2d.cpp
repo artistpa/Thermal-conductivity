@@ -87,10 +87,10 @@ cont Solver2d::operator() (unsigned solver) {
         doStep(0);
         finalise(1,Solvers::EULER);
         break;
-    case Solvers::RK45:
+    case Solvers::RK4:
         for (int i=0;i<6;i++)
             doStep(i);
-        finalise(6,Solvers::RK45); 
+        finalise(6,Solvers::RK4); 
         break;
     default:
         finalise(0,Solvers::EULER);

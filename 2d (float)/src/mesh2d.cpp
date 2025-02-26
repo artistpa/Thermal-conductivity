@@ -102,7 +102,7 @@ void mesh2d::update(Solver2d &s) {
 	#if METHOD==0
 		this->data=s(Solvers::EULER);
 	#elif METHOD==1
-		this->data=s(Solvers::RK45);
+		this->data=s(Solvers::RK4);
 	#endif
 };
 
