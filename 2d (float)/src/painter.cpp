@@ -8,7 +8,7 @@ painter::painter(int xwinsize, int ywinsize) {
 
 painter:: ~painter() {};
 
-void painter::display(mesh2d mesh) {
+void painter::display(mesh2d& mesh) {
 	// count x and y size of cell in pixels (cell_pisize)
 	this->pisize.xpisize = (this->windowsz.xsize / mesh.get_uxsize()) * 0.9;
 	this->pisize.ypisize = (this->windowsz.ysize / mesh.get_uysize());

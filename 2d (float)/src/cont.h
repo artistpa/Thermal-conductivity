@@ -7,8 +7,8 @@ class cont {
 
 private:
 	std::vector< std::vector<cell2d*>*> data;
-	int xsize;
-	int ysize;
+	int xsize=0;
+	int ysize=0;
 public:
 	cont() {}; // default constructor
 	cont(int xsize, int ysize); // specific constructor
@@ -20,7 +20,6 @@ public:
 	int get_xsize(); // returns x size of container
 	int get_ysize(); // returns y size of container
 	void set_temp_cont(int x, int y, float tempr); // sets temperature in the chosen cell
-
 };
 
 

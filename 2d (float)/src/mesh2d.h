@@ -35,13 +35,13 @@ private:
 	meshsize size; // units
 	temp_critical tcrit; // T_min and T_max
 public:
-	mesh2d(); // конструктор
+	mesh2d(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 	void set_mesh2d(int xlen, int ylen, float xstep, float ystep);
 	void clear_mesh();
 	void set_temp(int x, int y, float temp); // sets temp temperature in [x, y] cell
 	void set_T0(float T_max, float T_min); // sets starting temperature across
-	void update(Solver2d s);
+	void update(Solver2d &s);
 	float get_temp(int x, int y); // returns temperature in [x, y] cell
 	int get_uxsize(); // returns x length of mesh in units
 	int get_uysize(); // returns y length of mesh in units

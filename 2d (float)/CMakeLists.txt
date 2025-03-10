@@ -1,6 +1,13 @@
 cmake_minimum_required (VERSION 2.8)
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic")
+project (Thermal-Conductivity)
+
+
+if (NOT METHOD)
+    set(METHOD 0)
+endif()
+
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -Wpedantic -g -DMETHOD=${METHOD}")
 set(CMAKE_CXX_STANDARD 17)
 
 if(UNIX)
@@ -9,7 +16,7 @@ elseif(WIN32)
     message("This is a Windows System")
 endif()
 
-project (Thermal-Conductivity)
+
 
 find_package(SFML COMPONENTS graphics window system audio REQUIRED)
 
